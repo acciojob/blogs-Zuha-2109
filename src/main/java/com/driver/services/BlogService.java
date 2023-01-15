@@ -26,6 +26,9 @@ public class BlogService {
 
     public List<Blog> showBlogs(){
         //find all blogs
+        List<Blog> blogList = new ArrayList<>();
+
+        return blogRepository1.saveAll(blogList);
 
     }
 
@@ -40,6 +43,7 @@ public class BlogService {
 
     public Blog findBlogById(int blogId){
         //find a blog
+        return blogRepository1.findById(blogId).get();
     }
 
     public void addImage(Integer blogId, String description, String dimensions){
@@ -48,5 +52,6 @@ public class BlogService {
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
+        blogRepository1.deleteById(blogId);
     }
 }
