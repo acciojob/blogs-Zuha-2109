@@ -2,6 +2,7 @@ package com.driver.models;
 
 import javax.persistence.*;
 
+@Entity
 public class Image{
 
     @Id

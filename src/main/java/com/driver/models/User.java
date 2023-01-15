@@ -1,12 +1,11 @@
 package com.driver.models;
 
 
-import org.springframework.boot.test.autoconfigure.data.cassandra.DataCassandraTest;
 
 import javax.persistence.*;
 import java.util.List;
 
-
+@Entity
 public class User{
 
     @Id

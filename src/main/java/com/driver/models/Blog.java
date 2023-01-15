@@ -1,6 +1,6 @@
 package com.driver.models;
 
-import org.hibernate.annotations.CreationTimestamp;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,9 +9,7 @@ import java.util.List;
 @Entity
 public class Blog {
 
-    public int getId() {
-        return id;
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +30,12 @@ public class Blog {
     public Blog(String title, String content, Date pubDate){
         this.title = title;
         this.content = content;
-        this.publishDate = pubDate;
+        this.publishDate = publishDate;
+    }
+
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
@@ -57,7 +60,7 @@ public class Blog {
     public Date getPublishDate() {
         return publishDate;
     }
-    public void setPubDate(Date pubDate) {
+    public void setPubDate(Date publishDate) {
         this.publishDate = publishDate;
     }
 
