@@ -21,6 +21,7 @@ public class BlogController {
     @GetMapping
     public ResponseEntity<Integer> getAllBlogs() {
         int countOfBlogs = 0;
+        List<Blog> list= blogService.showBlogs();
         return new ResponseEntity<>(countOfBlogs, HttpStatus.OK);
     }
 

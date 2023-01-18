@@ -27,20 +27,25 @@ public class Image{
         return id;
     }
     public void setId(int id) {
+
         this.id = id;
     }
 
     public String getDescription() {
+
         return description;
     }
     public void setDescription(String description) {
+
         this.description = description;
     }
 
     public String getDimensions() {
+
         return dimensions;
     }
     public void setDimensions(String dimensions) {
+
         this.dimensions = dimensions;
     }
 
@@ -50,10 +55,12 @@ public class Image{
     public Blog blog;
 
     public Blog getBlog() {
+
         return blog;
     }
 
     public void setBlog(Blog blog) {
+
         this.blog = blog;
     }
 }
