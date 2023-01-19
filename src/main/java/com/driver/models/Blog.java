@@ -1,12 +1,14 @@
 package com.driver.models;
 
-
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "blog")
+
 public class Blog {
 
     @Id
@@ -17,7 +19,23 @@ public class Blog {
 
     private String content;
 
-    private Date pubdate;
+    private Date pubDate;
+
+    @ManyToOne
+    @JoinColumn
+    private User user;
+
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
+    private List<Image> imageList;
+
+    public Blog(String title, String content, User user) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
+    }
+
+    public Blog() {
+    }
 
     public int getId() {
         return id;
@@ -44,29 +62,11 @@ public class Blog {
     }
 
     public Date getPubDate() {
-        return pubdate;
+        return pubDate;
     }
 
-    public List<Image> getImageList() {
-        return imageList;
-    }
-
-    public void setImageList(List<Image> imageList) {
-        this.imageList = imageList;
-    }
-
-    public void setPubDate(Date pubdate
-    ) {
-        this.pubdate = pubdate;
-    }
-
-    public Blog() {
-    }
-
-    public Blog( String title, String content, Date pubdate) {
-        this.title = title;
-        this.content = content;
-        this.pubdate = pubdate;
+    public void setPubDate(Date pubDate) {
+        this.pubDate = pubDate;
     }
 
     public User getUser() {
@@ -77,10 +77,11 @@ public class Blog {
         this.user = user;
     }
 
-    @ManyToOne
-    @JoinColumn
-    private User user;
-
-    @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
-    private List<Image> imageList;
+    public List<Image> getImageList() {
+        return imageList;
     }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
+    }
+}

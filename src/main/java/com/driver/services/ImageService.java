@@ -7,37 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Objects;
-
 
 @Service
 public class ImageService {
     @Autowired
     ImageRepository imageRepository2;
-    @Autowired
-    private BlogRepository blogRepository;
+    BlogRepository blogRepository;
 
     public Image createAndReturn(Blog blog, String description, String dimensions){
         //create an image based on given parameters and add it to the imageList of given blog
-        Image image=new Image(description,dimensions);
+        Image image = new Image();
+        image.setDescription(description);
+        image.setDimensions(dimensions);
         image.setBlog(blog);
 
-        List<Image> res=blog.getImageList();
-        if(res==null){
-            res=new ArrayList<>();
-        }
 
-        res.add(image);
-        blog.setImageList(res);
 
         imageRepository2.save(image);
 
-        blogRepository.save(blog);
-
         return image;
-
     }
 
     public void deleteImage(Image image){
@@ -51,13 +41,36 @@ public class ImageService {
     public int countImagesInScreen(Image image, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
         //In case the image is null, return 0
-        if (screenDimensions.split("X").length == 2 || Objects.nonNull(image)) {
-            Integer maxLength = Integer.parseInt(screenDimensions.split("X")[0]) / Integer.parseInt(image.getDimensions().split("X")[0]) ;
-            Integer maxBreadth = Integer.parseInt(screenDimensions.split("X")[1]) / Integer.parseInt(image.getDimensions().split("X")[1]);
-            return maxLength * maxBreadth;
-        }
-        return 0;
+        String str = image.getDimensions();
 
+        int imageLength = 0;
+        int imageBreadth = 0;
+
+        for(int i = 0; i<str.length(); i++){
+            if(str.charAt(i) == 'X'){
+                imageLength = imageBreadth;
+                imageBreadth = 0;
+                continue;
+            }
+            imageBreadth *= 10;
+            imageBreadth += (str.charAt(i) - '0');
+        }
+
+
+        int screenLength = 0;
+        int screenBreadth = 0;
+        for(int i = 0; i<screenDimensions.length(); i++){
+            if(screenDimensions.charAt(i) == 'X'){
+                screenLength = screenBreadth;
+                screenBreadth = 0;
+                continue;
+            }
+            screenBreadth *= 10;
+            screenBreadth += (screenDimensions.charAt(i) - '0');
+        }
+
+        int ans = (int)(Math.floor((new Double(screenLength))/(new Double(imageLength)))*Math.floor((new Double(screenBreadth))/(new Double(imageBreadth))));
+        return ans;
 
     }
 }
