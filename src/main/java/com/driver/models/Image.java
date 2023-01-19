@@ -5,62 +5,52 @@ import javax.persistence.*;
 @Entity
 public class Image{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    public String description;
+    private String description;
 
-    public String dimensions;
-
-    public Image(){
-
-    }
-
-    public Image(String description, String dimensions){
-        this.description = description;
-        this.dimensions = dimensions;
-    }
-
+    private String dimensions;
 
     public int getId() {
         return id;
     }
-    public void setId(int id) {
 
+    public void setId(int id) {
         this.id = id;
     }
 
     public String getDescription() {
-
         return description;
     }
-    public void setDescription(String description) {
 
+    public void setDescription(String description) {
         this.description = description;
     }
 
     public String getDimensions() {
-
         return dimensions;
     }
-    public void setDimensions(String dimensions) {
 
+    public void setDimensions(String dimensions) {
         this.dimensions = dimensions;
     }
 
-
-    @ManyToOne
-    @JoinColumn
-    public Blog blog;
+    public Image() {
+    }
 
     public Blog getBlog() {
-
         return blog;
     }
 
     public void setBlog(Blog blog) {
-
         this.blog = blog;
     }
-}
+
+    public Image(String description, String dimensions) {
+        this.description = description;
+        this.dimensions = dimensions;
+    }
+    @ManyToOne
+    @JoinColumn
+    private Blog blog;
+    }

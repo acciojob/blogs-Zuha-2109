@@ -11,87 +11,74 @@ public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
+    public List<Blog> getBlogList() {
+        return blogList;
+    }
+
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
+    }
+
+    @Column(unique = true)
     private String username;
-   private String password;
 
-    private String fname;
-    private String lname;
+    private String password;
 
-    public User(){
+    private String firstname;
 
-    }
-
-    public User(String username, String password, String fname, String lname){
-        this.username = username;
-        this.password = password;
-        this.fname = fname;
-        this.lname = lname;
-    }
+    private String lastname;
 
     public int getId() {
-
         return id;
     }
 
     public void setId(int id) {
-
         this.id = id;
     }
 
-
     public String getUsername() {
-
         return username;
     }
 
     public void setUsername(String username) {
-
         this.username = username;
     }
 
-
     public String getPassword() {
-
         return password;
     }
 
     public void setPassword(String password) {
-
         this.password = password;
     }
 
-    public String getFname() {
-
-        return fname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFname(String fname) {
-
-        this.fname = fname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLname() {
-
-        return lname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLname(String lname) {
-
-        this.lname = lname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    public List<Blog> blogList;
-
-    public List<Blog> getBlogList() {
-
-        return blogList;
+    public User() {
     }
 
-    public void setBlogList(List<Blog> blogList){
-
-        this.blogList = blogList;
+    public User( String username, String password, String firstname, String lastname) {
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
-}
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Blog> blogList;
+    }
